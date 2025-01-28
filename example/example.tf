@@ -18,8 +18,8 @@ module "local_bus" {
       event_hub_role_arn = ""
       event_subscriptions = {
         new_software_release_available = { # this will be the rule name
-          event_type = ""
-          target_arn = "" # this will be the target (queue)
+          event_type = ""                  # Rule pattern must be: Domain.System.Noun-Verb.Major-Version
+          target_arn = ""                  # this will be the target (queue)
         }
       }
     }
@@ -32,11 +32,11 @@ module "local_bus" {
       event_hub_role_arn = "arn:aws:iam::123456789012:role/software_data-domain-bus-invoke-local-event-buses"
       event_subscriptions = {
         new_software_release_available = {
-          event_type = "NewSoftwareReleaseAvailable.V1"
+          event_type = "OrderManagement.SAP.OrderCreated.V1"
           target_arn = "arn:aws:sqs:eu-west-1:123456789012:eventhub-poc-softwaredata-queue"
         },
         new_software_release_available_V2 = {
-          event_type = "NewSoftwareReleaseAvailable.V2"
+          event_type = "OrderManagement.Shopify.OrderCreated.V2"
           target_arn = "arn:aws:sqs:eu-west-1:123456789012:eventhub-poc-softwaredata-queue"
         }
       }
