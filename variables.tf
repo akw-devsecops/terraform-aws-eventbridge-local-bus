@@ -8,6 +8,7 @@ variable "domain_subscriptions" {
   type = map(object({
     event_hub_role_arn = string
     event_subscriptions = map(object({
+      consumer_service     = string
       event_type           = string
       target_arn           = string
       sqs_message_group_id = optional(string)

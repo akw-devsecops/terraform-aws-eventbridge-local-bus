@@ -30,7 +30,7 @@ No modules.
 
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
-| <a name="input_domain_subscriptions"></a> [domain\_subscriptions](#input\_domain\_subscriptions) | Event subscriptions | <pre>map(object({<br>    event_hub_role_arn = string<br>    event_subscriptions = map(object({<br>      event_type           = string<br>      target_arn           = string<br>      sqs_message_group_id = optional(string)<br>    }))<br>  }))</pre> | n/a | yes |
+| <a name="input_domain_subscriptions"></a> [domain\_subscriptions](#input\_domain\_subscriptions) | Event subscriptions | <pre>map(object({<br>    event_hub_role_arn = string<br>    event_subscriptions = map(object({<br>      consumer_service     = string<br>      event_type           = string<br>      target_arn           = string<br>      sqs_message_group_id = optional(string)<br>    }))<br>  }))</pre> | n/a | yes |
 | <a name="input_local_bus_name"></a> [local\_bus\_name](#input\_local\_bus\_name) | Name of the local event bus | `string` | n/a | yes |
 
 ## Outputs

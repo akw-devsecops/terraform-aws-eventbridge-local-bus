@@ -32,6 +32,10 @@ resource "aws_cloudwatch_event_rule" "this" {
   name          = each.value.name
   description   = each.value.description
   event_pattern = each.value.event_pattern
+
+  tags = {
+    consumer_service = each.value.consumer_service
+  }
 }
 
 # create targets for local bus

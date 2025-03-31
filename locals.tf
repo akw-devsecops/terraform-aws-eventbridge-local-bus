@@ -8,6 +8,7 @@ locals {
         event_pattern        = jsonencode({ "detail.type" : [ev.event_type] })
         target_arn           = ev.target_arn
         sqs_message_group_id = ev.sqs_message_group_id
+        consumer_service     = ev.consumer_service
       }
     ]
   ])
