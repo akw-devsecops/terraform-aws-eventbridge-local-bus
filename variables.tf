@@ -11,6 +11,7 @@ variable "domain_subscriptions" {
       consumer_service     = string
       event_type           = string
       target_arn           = string
+      extra_filter         = optional(any)
       sqs_message_group_id = optional(string)
     }))
   }))
