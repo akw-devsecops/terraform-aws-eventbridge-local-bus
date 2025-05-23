@@ -20,6 +20,7 @@ module "local_bus" {
         new_software_release_available = { # this will be the rule name
           consumer_service = ""            # which service is consuming the event
           event_type       = ""
+          extra_filter     = "" # add additional event patterns
           target_arn       = "" # this will be the target (queue)
         }
       }
@@ -32,14 +33,32 @@ module "local_bus" {
     software_data = {
       event_hub_role_arn = "arn:aws:iam::123456789012:role/software_data-domain-bus-invoke-local-event-buses"
       event_subscriptions = {
-        new_software_release_available = {
+        sap_delivery_posted = {
           consumer_service = "KaercherOrderService"
-          event_type       = "NewSoftwareReleaseAvailable.V1"
-          target_arn       = "arn:aws:sqs:eu-west-1:123456789012:eventhub-poc-softwaredata-queue"
+          event_type       = "Logistic.SAP.SAPDeliveryPosted.V2"
+          extra_filter = {
+            "detail.data" = {
+              Changes = {
+                fieldName = ["Resource.Status"]
+              }
+            }
+          }
+          /* Example of the event pattern:
+          {
+            "detail.data": {
+              "Changes": {
+                "fieldName": ["Resource.Status"]
+              }
+            },
+            "detail.type": ["Logistic.SAP.SAPDeliveryPosted.V2"]
+        }
+          */
+          target_arn = "arn:aws:sqs:eu-west-1:123456789012:eventhub-poc-softwaredata-queue"
         },
-        new_software_release_available_V2 = {
+        sap_delivery_posted = {
           consumer_service = "ReturnService"
-          event_type       = "NewSoftwareReleaseAvailable.V2"
+          event_type       = "Logistic.SAP.SAPDeliveryPosted.V2"
+          extra_filter     = {}
           target_arn       = "arn:aws:sqs:eu-west-1:123456789012:eventhub-poc-softwaredata-queue"
         }
       }
